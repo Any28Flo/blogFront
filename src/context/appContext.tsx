@@ -1,5 +1,5 @@
 import React ,{ createContext, useReducer, Dispatch } from "react";
-import { PostsActions, postsReducer } from "./blogReducer";
+import { PostsActions, Types, postsReducer } from "./blogReducer";
 import { Post, User } from "../types";
 
 
@@ -39,7 +39,10 @@ export type Action =
 	| {
 		type: 'login';
 		payload: State;
-	}
+	} |{
+        type: Types.SET_POSTS;
+        payload: Post[]
+    }
 	
 export type AppContextType = State & {
     dispatch: React.Dispatch<Action>;

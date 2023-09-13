@@ -15,6 +15,7 @@ export type PostsActions = ActionMap<PostPayload>[keyof ActionMap<PostPayload>];
 export const postsReducer = (state: Post[], action: PostsActions) => {
     switch (action.type) {
         case Types.SET_POSTS:
+            
             return {
                 ...state,
                 posts: action.payload
