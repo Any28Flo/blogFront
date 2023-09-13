@@ -3,13 +3,21 @@ import { useAppContext } from '../context';
 import ListPosts from '../components/DataDisplay/ListPosts';
 import { useAxios } from '../customHooks/useAxios';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { Types } from '../context/blogReducer';
+import { useEffect } from 'react';
 const Home = () => {
 
-  const { state } = useAppContext();
-  const {data, isLoading, error} = useAxios('/posts');
-  console.log(data)
+  const { state, dispatch} = useAppContext();
+  
+  const {data, isLoading} = useAxios('/posts');
 
+  useEffect(()=>{
+    dispatch({
+           type: Types.SET_POSTS,
+           payload: data
+    })
+  },[data])
+  
   return (
     <Box sx={{ gridArea: 'main', bgcolor: 'secondary.main' }}>
       <Box>
@@ -20,7 +28,7 @@ const Home = () => {
           isLoading && (<CircularProgress />)
         }
         {
-          state.posts ? 'Sin Posts' : <ListPosts data={state.posts}/>
+          state.posts.length === 0 ? 'Sin Posts' : <ListPosts data={data}/>
 
         }
       </Box>
