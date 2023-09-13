@@ -1,16 +1,16 @@
 import { Post } from "../../types"
+import CardPost from "./CardPost"
 
 interface ListPostsProps {
     data : Post[]
 }
 const ListPosts = ({data}: ListPostsProps) => {
    
-    console.log(data)
     return (
         <>
         {
             data.map((post: Post) => (
-                <div key={post.id}></div>
+                <CardPost key={post.id} data={post}/>
             ))
         }
         </>

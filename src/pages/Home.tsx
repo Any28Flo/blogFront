@@ -29,7 +29,6 @@ const Home = () => {
         }
         {
           state.posts.length === 0 ? 'Sin Posts' : <ListPosts data={data}/>
-
         }
       </Box>
 
