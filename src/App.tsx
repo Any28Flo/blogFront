@@ -2,7 +2,7 @@ import './App.css'
 
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Wrapper from './components/Wrapper';
+import Wrapper from './components/layout/Wrapper';
 
 
 const Home = lazy(() => import('./pages/Home'));
