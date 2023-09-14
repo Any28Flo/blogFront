@@ -8,6 +8,7 @@ export enum Types {
 
 type PostPayload = {
     [Types.SET_POSTS]: Post[];
+    [Types.ADD_POSTS]: Post;
 }
 
 export type PostsActions = ActionMap<PostPayload>[keyof ActionMap<PostPayload>];
@@ -17,7 +18,10 @@ export const postsReducer = (state: Post[], action: PostsActions) => {
         case Types.SET_POSTS:
             return action.payload
             
-      
+        case Types.ADD_POSTS:
+            return[...state, action.payload]
+
+            
         default:
             return state;
     }

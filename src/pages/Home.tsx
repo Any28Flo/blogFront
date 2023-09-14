@@ -1,18 +1,23 @@
-import { Box } from '@mui/material'
+import { useEffect, useState} from 'react';
+
+import { Box, CircularProgress, Stack} from '@mui/material'
 import { useAppContext } from '../context';
 
 import { useAxios } from '../customHooks/useAxios';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import { Types } from '../context/blogReducer';
-import { useEffect, useState} from 'react';
-import { Stack } from '@mui/material';
+
 import ListPosts from '../components/DataDisplay/ListPosts';
 import Filter from '../components/Inputs/Filter';
+
 import { getPosts } from '../db/api';
+import ModalPost from '../components/Dialog/ModalPost';
+
 const filterForm ={
   type: 'title',
   stringPattern: ''
 }
+
 const Home = () => {
 
   const { state, dispatch , } = useAppContext();
@@ -70,9 +75,13 @@ const Home = () => {
           onChange={handleChange}
           onSubmit={handleSubmit}
           />
+
+        <ModalPost  />
+          
       </Box>
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
+        flexWrap="wrap"
+        gap={2}
         spacing={{ xs: 1, sm: 2, md: 4 }}
       >
         {
