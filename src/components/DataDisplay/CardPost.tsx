@@ -17,7 +17,7 @@ interface CardPostProps{
 const CardPost = ({data}: CardPostProps) => {
 
     const newDate = new Date(data.createdAt);
-    
+    // TODO: -Add responsive card size
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader

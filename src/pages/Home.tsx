@@ -1,11 +1,13 @@
 import { Box } from '@mui/material'
 import { useAppContext } from '../context';
-import ListPosts from '../components/DataDisplay/ListPosts';
+
 import { useAxios } from '../customHooks/useAxios';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Types } from '../context/blogReducer';
 import { useEffect } from 'react';
 import { Stack } from '@mui/material';
+import ListPosts from '../components/DataDisplay/ListPosts';
+import Filter from '../components/Inputs/Filter';
 const Home = () => {
 
   const { state, dispatch } = useAppContext();
@@ -24,6 +26,9 @@ const Home = () => {
 
       <Box>
         <h2>Blog post</h2>
+      </Box>
+      <Box>
+        <Filter/>
       </Box>
       <Stack
         sx={{ gridArea: 'main', bgcolor: 'secondary.main' }}
