@@ -8,7 +8,14 @@ last update: 14- sep- 2023
 
 <hr/>
 
+This project is mobile browser friendly was created with react.
+
+
 ## Docs
+|  Landing             |  Components  |
+| :-------------------------:|:-------------------------:|
+![](./docs/images/desktop.png)  |  ![](./docs/images/components.png)
+
 
 
 ## System Requirements
