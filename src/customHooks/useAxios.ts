@@ -5,7 +5,6 @@ export const useAxios = (url: string) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
     const getPostsData = async () => {
         setIsLoading(true);
         try {
@@ -17,7 +16,7 @@ export const useAxios = (url: string) => {
             console.log(error);
             setIsLoading(false);
             setError(error);
-            
+
         }
     }
     useEffect(() => {

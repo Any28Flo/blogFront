@@ -1,5 +1,4 @@
 import api from '../services/api';
-import { postUser } from '../../../blog-back/src/controllers/users';
 
 
 export const getPosts = async (endpoint:string) => {
@@ -10,8 +9,9 @@ export const getPosts = async (endpoint:string) => {
 		if (response.status === 200) {
 			return response.data;
 		}
+
 	} catch (error) {
-		throw new Error(error?.response?.data);
+		throw new Error("Sucedio un error al obtener los posts");
 	}
         
 }

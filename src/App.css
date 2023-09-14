@@ -1,0 +1,19 @@
+
+body {
+    font-size: 1.6rem;
+    font-family: "Lato", sans-serif;
+    background-color: var(--gris-claro);
+}
+html {
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
