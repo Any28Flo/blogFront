@@ -1,21 +1,14 @@
-
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import {Card, CardHeader, CardContent, CardActions, Typography, Button, Avatar} from '@mui/material';
+import red from '@mui/material/colors/red';
 import { Post } from '../../types';
-import { red } from '@mui/material/colors';
 import { formatDate } from '../../utils';
+import { Link } from "react-router-dom";
 
 interface CardPostProps{
     data: Post
 }
 
 const CardPost = ({data}: CardPostProps) => {
-
     const newDate = new Date(data.createdAt);
     // TODO: -Add responsive card size
     return (
@@ -23,7 +16,8 @@ const CardPost = ({data}: CardPostProps) => {
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
+                        
+                        {data.author.name[0]}
                     </Avatar>
                 }
                 title={data.title}
@@ -31,13 +25,19 @@ const CardPost = ({data}: CardPostProps) => {
             
             />
             <CardContent>
+
                 <Typography variant="body2" color="text.secondary">
                     {data.content.substring(0, 70)}...
                 </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Author: {data.author.name}
+                </Typography>
+                
             </CardContent>
-            {/* TODO: -Add router to link to details */}
             <CardActions>
-                <Button size="small">See More</Button>
+                <Link to={`/post/:${data.id}`}>
+                    <Button size="small">See More</Button>
+                </Link>
             </CardActions>
         </Card>
     )
