@@ -1,7 +1,10 @@
+import { Box } from "@mui/material"
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <Box sx={{ gridArea: 'footer', bgcolor: 'primary.main' }}>
+      Build with love
+      </Box>
   )
 }
 

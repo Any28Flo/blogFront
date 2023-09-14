@@ -12,6 +12,7 @@ import Filter from '../components/Inputs/Filter';
 
 import { getPosts } from '../db/api';
 import ModalPost from '../components/Dialog/ModalPost';
+import ReloadPromp from '../components/DataDisplay/ReloadPromp';
 
 const filterForm ={
   type: 'title',
@@ -91,6 +92,9 @@ const Home = () => {
           query ? <ListPosts data={postsFiltered} /> :<ListPosts data={state.posts} />
         }
       </Stack>
+      <Box>
+        <ReloadPromp/>
+      </Box>
     </Box>
   )
 }

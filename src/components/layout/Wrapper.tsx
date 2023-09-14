@@ -1,6 +1,7 @@
 import { Box } from '@mui/system';
 import NavBar from './NavBar';
 import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
 
 const Wrapper = () => {
   return (
@@ -19,6 +20,7 @@ const Wrapper = () => {
     >
       <NavBar />
       <Outlet />
+      <Footer/>
     </Box>
   )
 }
