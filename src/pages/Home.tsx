@@ -70,13 +70,6 @@ const Home = () => {
         <h2>Blog post</h2>
       </Box>
       <Box>
-        <Filter 
-          state={filter}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          />
-
-        <ModalPost  />
           
       </Box>
       <Stack
