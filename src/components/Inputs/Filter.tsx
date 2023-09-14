@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { Box, TextField, FormControl, InputLabel, MenuItem, Button} from '@mui/material';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 const options = [
     {
         value: 'title',
@@ -15,25 +14,14 @@ const options = [
         label: 'Content'
     }
 ]
-const Filter = () => {
+type filterProps = {
+    state: {type:string, stringPattern:string},
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+}
+const Filter = ({state, onChange, onSubmit}: filterProps) => {
 
-    const [filterType, setFilterType] = useState('title');
-    const [stringPattern, setStringPattern] = useState('');
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setFilterType(event.target.value as string);
-    };
-
-    const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setStringPattern(event.target.value);
-    }
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        console.log(filterType, stringPattern);
-        const query= `/filter?${filterType}=${stringPattern}`
-        console.log(query)
-    }
-
+    
     return (
         <Box
             component="form"
@@ -46,22 +34,25 @@ const Filter = () => {
             }}
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
         >
             <TextField
                 required
                 id="filter-type"
-                onChange={handleChangeInput}
+                onChange={onChange}
+                value={state.stringPattern}
+                name="stringPattern"
             />
             <FormControl>
                 <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
                 <Select
+                    name="type"
                     required
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={filterType}
+                    value={state.type}
                     label="Filter By"
-                    onChange={handleChange}
+                    onChange={onChange}
                 >
                     {
                         options.map((option)=>{
