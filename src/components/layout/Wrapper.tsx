@@ -1,6 +1,7 @@
-import { Box, Container, Grid} from '@mui/material';
+import { Grid} from '@mui/material';
 import NavBar from './NavBar';
 import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
 
 const Wrapper = () => {
   return (
@@ -12,10 +13,11 @@ const Wrapper = () => {
       gridTemplateAreas={`header
       main
       footer`}
-      maxWidth="lg"
+      maxWidth="xl"
     >
       <NavBar />
       <Outlet />
+      <Footer/>
     </Grid>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, TextField, FormControl, InputLabel, MenuItem, Button} from '@mui/material';
+import { Box,Stack, TextField, FormControl, InputLabel, MenuItem, Button} from '@mui/material';
 import Select from '@mui/material/Select';
 const options = [
     {
@@ -23,15 +23,13 @@ const Filter = ({state, onChange, onSubmit}: filterProps) => {
 
     
     return (
-        <Box
+        <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            justifyContent="center"
+            alignItems="center"
+            gap={4}
             component="form"
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginBottom: '2rem',
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
+            
             noValidate
             autoComplete="off"
             onSubmit={onSubmit}
@@ -64,9 +62,9 @@ const Filter = ({state, onChange, onSubmit}: filterProps) => {
                    
                 </Select>
             </FormControl>
-            <Button type="submit">Submit</Button>
+            <Button variant="contained" type="submit">Search</Button>
 
-        </Box>
+        </Stack>
     )
 }
 

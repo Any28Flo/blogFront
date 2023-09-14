@@ -20,7 +20,7 @@ const filterForm ={
 
 const Home = () => {
 
-  const { state, dispatch , } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const { data, isLoading,error } = useAxios('/posts');
 
@@ -60,17 +60,25 @@ const Home = () => {
     if(query){
       getData()
     }
-    
   }, [query])
-  
-  if(error) return <p>{error}</p>
+
+  if (error)return ( <div>Error en el server</div>)
   return (
-    <Box sx={{ gridArea: 'main', padding:'5rem'}}>
+    <Box width="100%" sx={{ gridArea: 'main', padding:'5rem'}}>
       <Box>
         <h2>Blog post</h2>
       </Box>
+      <Box marginBottom={2}>
+        <Filter 
+          state={filter}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          />
+
+      </Box>
       <Box>
-          
+        <ModalPost  />
+
       </Box>
       <Stack
         flexWrap="wrap"

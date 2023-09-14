@@ -48,7 +48,7 @@ const ModalPost = () => {
     }
 
     return (
-        <div>
+        <div  >
             <Button variant="outlined" onClick={handleClickOpen}>
                 Create New Post
             </Button>
