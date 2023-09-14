@@ -42,8 +42,6 @@ const ModalPost = () => {
     }
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(2)
-        console.log(newPost)
        postData()
     }
 
