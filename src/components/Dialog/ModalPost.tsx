@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Dialog, Button, DialogTitle, DialogContent, TextField, DialogActions, Box } from '@mui/material';
+import { Dialog, Button, DialogTitle, DialogContent, TextField, DialogActions, Box,Grid } from '@mui/material';
 import { postMethod } from '../../db/api';
 import { Types } from '../../context/blogReducer';
 import { useAppContext } from '../../context';
@@ -48,22 +48,24 @@ const ModalPost = () => {
     }
 
     return (
-        <div  >
+        <div>
             <Button variant="outlined" onClick={handleClickOpen}>
                 Create New Post
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>New Post</DialogTitle>
                 <DialogContent >
-                    <Box
+
+                      <Box
                         component="form"
                         sx={{
                             display: 'flex',
+                            gap: '1rem',    
                             flexDirection: 'column',
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginBottom: '2rem',
-                            '& .MuiTextField-root': { m: 1, width: '25ch' },
+                            padding: '1rem',
                         }}
                         noValidate
                         autoComplete="off"
@@ -74,7 +76,6 @@ const ModalPost = () => {
                             margin="dense"
                             id="title"
                             name="title"
-
                             label="Title Post"
                             type="text"
                             fullWidth
@@ -95,12 +96,12 @@ const ModalPost = () => {
                             value={newPost.content}
 
                         />
-                        <Button type="submit">Create</Button>
+                        <Button variant="contained" type="submit">Create</Button>
 
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button  onClick={handleClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </div>

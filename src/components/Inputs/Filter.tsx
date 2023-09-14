@@ -29,7 +29,6 @@ const Filter = ({state, onChange, onSubmit}: filterProps) => {
             alignItems="center"
             gap={4}
             component="form"
-            
             noValidate
             autoComplete="off"
             onSubmit={onSubmit}
@@ -44,6 +43,7 @@ const Filter = ({state, onChange, onSubmit}: filterProps) => {
             <FormControl>
                 <InputLabel id="demo-simple-select-label">Filter By</InputLabel>
                 <Select
+                    minRows={300}
                     name="type"
                     required
                     labelId="demo-simple-select-label"
