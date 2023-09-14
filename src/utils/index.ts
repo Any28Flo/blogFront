@@ -1,6 +1,7 @@
-export const formatDate = (date:Date ) => {
+export const formatDate = (date:string) => {
+    const newDate = new Date(date);
 
-	return date.toLocaleDateString('es-ES',{
+	return newDate.toLocaleDateString('es-ES',{
 		year: 'numeric',
 		month: 'long',
 		day: '2-digit'

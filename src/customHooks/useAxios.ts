@@ -14,8 +14,10 @@ export const useAxios = (url: string) => {
             setIsLoading(false);
 
         } catch (error) {
+            console.log(error);
             setIsLoading(false);
             setError(error);
+            
         }
     }
     useEffect(() => {

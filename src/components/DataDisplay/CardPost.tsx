@@ -9,7 +9,6 @@ interface CardPostProps{
 }
 
 const CardPost = ({data}: CardPostProps) => {
-    const newDate = new Date(data.createdAt);
     // TODO: -Add responsive card size
     return (
         <Card sx={{ maxWidth: 345 , minHeight: 60}}>
@@ -21,7 +20,7 @@ const CardPost = ({data}: CardPostProps) => {
                     </Avatar>
                 }
                 title={data.title}
-                subheader={formatDate(newDate)}
+                subheader={formatDate(data.createdAt)}
             
             />
             <CardContent>
@@ -35,7 +34,7 @@ const CardPost = ({data}: CardPostProps) => {
                 
             </CardContent>
             <CardActions>
-                <Link to={`/post/:${data.id}`}>
+                <Link to={`/post/${data.id}`}>
                     <Button size="small">See More</Button>
                 </Link>
             </CardActions>
