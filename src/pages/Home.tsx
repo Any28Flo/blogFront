@@ -80,7 +80,8 @@ const Home = () => {
           
       </Box>
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
+        flexWrap="wrap"
+        gap={2}
         spacing={{ xs: 1, sm: 2, md: 4 }}
       >
         {
