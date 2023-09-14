@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 
-import { Box, CircularProgress, Stack} from '@mui/material'
+import { Box, CircularProgress, Grid} from '@mui/material'
 import { useAppContext } from '../context';
 
 import { useAxios } from '../customHooks/useAxios';
@@ -64,7 +64,7 @@ const Home = () => {
 
   if (error)return ( <div>Error en el server</div>)
   return (
-    <Box width="100%" sx={{ gridArea: 'main', padding:'5rem'}}>
+    <Box width="100%"  sx={{ gridArea: 'main', padding:'2rem'}}>
       <Box>
         <h2>Blog post</h2>
       </Box>
@@ -80,10 +80,7 @@ const Home = () => {
         <ModalPost  />
 
       </Box>
-      <Stack
-        flexWrap="wrap"
-        gap={2}
-        spacing={{ xs: 1, sm: 2, md: 4 }}
+      <Grid justifyContent="center"   container spacing={2} marginTop={2}
       >
         {
           isLoading && (<CircularProgress />)
@@ -91,7 +88,7 @@ const Home = () => {
         {
           query ? <ListPosts data={postsFiltered} /> :<ListPosts data={state.posts} />
         }
-      </Stack>
+      </Grid>
     </Box>
   )
 }
