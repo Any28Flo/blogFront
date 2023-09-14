@@ -15,11 +15,16 @@ const filterForm ={
 }
 const Home = () => {
 
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch , } = useAppContext();
 
-  const { data, isLoading } = useAxios('/posts');
+  const { data, isLoading,error } = useAxios('/posts');
+
   const [filter, setFilter] = useState(filterForm);
+
   const [query, setQuery] = useState('');
+
+  const [postsFiltered, setPostsFiltered] = useState([]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFilter({ ...filter, [name]: value })
@@ -27,14 +32,13 @@ const Home = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(filter)
     const query= `/posts/custom-posts?filter=${filter.type}&strPattern=${filter.stringPattern}`
     setQuery(query);
   } 
   const getData = async () => {
     try {
         const data = await getPosts(query)
-        console.log(data)
+        setPostsFiltered(data.posts)
 
     } catch (error) {
         console.log(error)
@@ -45,12 +49,16 @@ const Home = () => {
       type: Types.SET_POSTS,
       payload: data
     })
-  }, [dispatch, data])
-  
-  useEffect(() => {
-    getData()
-  }, [query])
+  }, [data])
 
+  useEffect(() => {
+    if(query){
+      getData()
+    }
+    
+  }, [query])
+  
+  if(error) return <p>{error}</p>
   return (
     <Box sx={{ gridArea: 'main', padding:'5rem'}}>
       <Box>
@@ -64,7 +72,6 @@ const Home = () => {
           />
       </Box>
       <Stack
-       
         direction={{ xs: 'column', sm: 'row' }}
         spacing={{ xs: 1, sm: 2, md: 4 }}
       >
@@ -72,7 +79,7 @@ const Home = () => {
           isLoading && (<CircularProgress />)
         }
         {
-          state.posts.length === 0 ? 'Sin Posts' : <ListPosts data={data} />
+          query ? <ListPosts data={postsFiltered} /> :<ListPosts data={state.posts} />
         }
       </Stack>
     </Box>
