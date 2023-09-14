@@ -24,6 +24,8 @@ This project is mobile browser friendly was created with react.
 - [NodeJS](node) `>=18`
 - [npm](npm) v8.16.0 or greater
 
+- The blog-back must be up and running
+
 To verify things are set up properly, you can run this:
 
 ```shell
