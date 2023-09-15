@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useAxios } from '../customHooks/useAxios';
 import { formatDate } from '../utils';
 import { Post } from '../types';
+import Spinner from '../components/layout/Spinner';
 
 const DetailPost = () => {
 
@@ -17,7 +18,7 @@ const DetailPost = () => {
   }, [data])
 
   // TODO: - Add custom component Loading and wrapper
-  if (isLoading) return <Box sx={{ gridArea: 'main', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress /></Box>
+  if (isLoading) return (<Spinner />)
   
   return (
     <Box sx={{ gridArea: 'main', padding:'5rem'}}>

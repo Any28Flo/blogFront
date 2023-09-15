@@ -12,7 +12,7 @@ export type InitialStateType = {
 const initState = {
     //user: null,
     posts: [],
-    isOnline: true,
+    isOnline: localStorage.getItem('isOnline') === 'true' ? true : false,
     //selectedPost: null,
 }
 const AppContext = createContext<{
