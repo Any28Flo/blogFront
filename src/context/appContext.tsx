@@ -2,35 +2,39 @@ import React ,{ createContext, useReducer, Dispatch } from "react";
 import { PostsActions, Types, postsReducer } from "./blogReducer";
 import { Post } from "../types";
 
-
+import {isOnlineReducer, isOnlineActions}from './isOnlineReducer';
 export type InitialStateType = {
 	//user:  null,
     posts: Post[],
+    isOnline : boolean
     //selectedPost: null,
 }
 const initState = {
     //user: null,
     posts: [],
+    isOnline: localStorage.getItem('isOnline') === 'true' ? true : false,
     //selectedPost: null,
 }
 const AppContext = createContext<{
     state: InitialStateType;
-    dispatch: Dispatch< PostsActions>;
+    dispatch: Dispatch< PostsActions | isOnlineActions>;
 }>({
     state: initState,
     dispatch: () => null
 });
 
 const mainReducer = (
-        {posts}: InitialStateType,
-        action: PostsActions
+        {posts, isOnline}: InitialStateType,
+        action: PostsActions | isOnlineActions
     ) => ({
     posts: postsReducer(posts, action),
+    isOnline: isOnlineReducer(isOnline, action)
 })
 
 export interface State  {
 	//user: User| null;
 	posts: Post[];
+    isOnline: boolean;
     //sselectedPost: Post | null;
 	
 }

@@ -12,6 +12,8 @@ import Filter from '../components/Inputs/Filter';
 
 import { getPosts } from '../db/api';
 import ModalPost from '../components/Dialog/ModalPost';
+import Status from '../components/Inputs/Status';
+import Spinner from '../components/layout/Spinner';
 
 const filterForm ={
   type: 'title',
@@ -21,6 +23,7 @@ const filterForm ={
 const Home = () => {
 
   const { state, dispatch } = useAppContext();
+
 
   const { data, isLoading,error } = useAxios('/posts');
 
@@ -40,6 +43,7 @@ const Home = () => {
     const query= `/posts/custom-posts?filter=${filter.type}&strPattern=${filter.stringPattern}`
     setQuery(query);
   } 
+
   const getData = async () => {
     try {
         const data = await getPosts(query)
@@ -48,12 +52,17 @@ const Home = () => {
     } catch (error) {
         console.log(error)
     }
-}
+  }
+  
   useEffect(() => {
-    dispatch({
-      type: Types.SET_POSTS,
-      payload: data
-    })
+    if(state.posts.length === 0){
+      dispatch({
+        type: Types.SET_POSTS,
+        payload: data
+      })
+    }
+    localStorage.setItem('posts', JSON.stringify(data) ?? [])
+
   }, [data])
 
   useEffect(() => {
@@ -63,12 +72,17 @@ const Home = () => {
   }, [query])
 
   if (error)return ( <div>Error en el server</div>)
+
+  if (isLoading) return (<CircularProgress />)
   return (
     <Box width="100%"  sx={{ gridArea: 'main', padding:'2rem'}}>
       <Box>
         <h2>Blog post</h2>
       </Box>
-      <Box marginBottom={2}>
+      <Box>
+        <Status/>
+      </Box>
+      <Box margin={2}>
         <Filter 
           state={filter}
           onChange={handleChange}
@@ -80,10 +94,9 @@ const Home = () => {
         <ModalPost  />
 
       </Box>
-      <Grid justifyContent="center"   container spacing={2} marginTop={2}
-      >
+      <Grid justifyContent="center" spacing={{ xs: 1, sm: 2, md: 4}}   container marginTop={2}>
         {
-          isLoading && (<CircularProgress />)
+          isLoading && (<Spinner/>)
         }
         {
           query ? <ListPosts data={postsFiltered} /> :<ListPosts data={state.posts} />

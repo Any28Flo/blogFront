@@ -6,9 +6,9 @@ export interface User {
 }
 export interface Post{
     id: number,
-    title: string,
-    content: string,
-    createdAt: string,
+    title?: string,
+    content?: string,
+    createdAt?: string,
     author: User
 }
   
