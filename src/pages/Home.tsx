@@ -12,6 +12,7 @@ import Filter from '../components/Inputs/Filter';
 
 import { getPosts } from '../db/api';
 import ModalPost from '../components/Dialog/ModalPost';
+import Status from '../components/Inputs/Status';
 
 const filterForm ={
   type: 'title',
@@ -21,6 +22,7 @@ const filterForm ={
 const Home = () => {
 
   const { state, dispatch } = useAppContext();
+
 
   const { data, isLoading,error } = useAxios('/posts');
 
@@ -68,7 +70,10 @@ const Home = () => {
       <Box>
         <h2>Blog post</h2>
       </Box>
-      <Box marginBottom={2}>
+      <Box>
+        <Status/>
+      </Box>
+      <Box margin={2}>
         <Filter 
           state={filter}
           onChange={handleChange}
