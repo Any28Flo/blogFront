@@ -17,24 +17,23 @@ const DetailPost = () => {
   const [actualPost, setActualPost] = useState<null | Post >(null)
 
   useEffect(() => { 
-    if(state.isOnline){
       setActualPost(data.post)
-      return
-    }
-    setActualPost(state.posts.find(post => post.id === params.id))
+      
+    
 
-  }, [data, state.isOnline])
+  }, [data])
 
   if (isLoading) return (<Spinner />)
   
   return (
-    <Box sx={{ gridArea: 'main', padding:'5rem'}}>
+    <Box sx={{ gridArea: 'main', padding:'5rem', minHeight:'100vh'}}>
       <Box>
       <Typography variant="h2" mb={2}>{actualPost?.title}</Typography>
       <Divider />
       {/*  TODO:- Add icons to date and author  */}
+      
       <Typography variant="body1" mt={2}>
-        <CalendarTodayIcon/>{formatDate(actualPost?.createdAt)} | <PersonIcon/> {actualPost?.author?.name} </Typography>
+        <CalendarTodayIcon color="primary"/>{formatDate(actualPost?.createdAt)} | <PersonIcon color="primary"/> {actualPost?.author?.name} </Typography>
       </Box>
       <Box mt={5}>
         <Typography variant="body1">{actualPost?.content}</Typography>
