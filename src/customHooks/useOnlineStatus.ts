@@ -6,6 +6,7 @@ export function useOnlineStatus() {
   useEffect(() => {
     function handleOnline() {
       setIsOnline(true);
+     
     }
     function handleOffline() {
       setIsOnline(false);

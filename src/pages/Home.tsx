@@ -65,6 +65,7 @@ const Home = () => {
   }, [query])
 
   if (error)return ( <div>Error en el server</div>)
+  if (isLoading) return (<CircularProgress />)
   return (
     <Box width="100%"  sx={{ gridArea: 'main', padding:'2rem'}}>
       <Box>

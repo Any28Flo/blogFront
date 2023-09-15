@@ -10,7 +10,7 @@ const initState = {
     authorId:  1
 }
 const ModalPost = () => {
-    const { dispatch } = useAppContext();
+    const { state, dispatch } = useAppContext();
 
     const [open, setOpen] = useState(false);
     const [newPost, setNewPost] = useState(initState)
@@ -47,7 +47,7 @@ const ModalPost = () => {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} disabled={!state.isOnline}>
                 Create New Post
             </Button>
             <Dialog open={open} onClose={handleClose}>

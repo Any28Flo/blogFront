@@ -1,11 +1,22 @@
+import { useEffect } from 'react';
 import { useOnlineStatus } from '../../customHooks/useOnlineStatus';
 import { Typography} from '@mui/material';
+import { Types } from '../../context/isOnlineReducer';
+import { useAppContext } from '../../context';
 
 const Status = () => {
-  const isOnline = useOnlineStatus();
+  const { dispatch } = useAppContext();
 
- // return <h1></h1>;
- return(
+  const isOnline = useOnlineStatus();
+  
+  useEffect(()=>{
+    dispatch({
+      type: Types.SET_IS_ONLINE,
+      payload: isOnline
+    })
+  }, [isOnline])
+
+  return(
     <Typography
     variant="h6"
     noWrap
