@@ -42,6 +42,7 @@ const Home = () => {
     const query= `/posts/custom-posts?filter=${filter.type}&strPattern=${filter.stringPattern}`
     setQuery(query);
   } 
+
   const getData = async () => {
     try {
         const data = await getPosts(query)
@@ -50,7 +51,8 @@ const Home = () => {
     } catch (error) {
         console.log(error)
     }
-}
+  }
+  
   useEffect(() => {
     dispatch({
       type: Types.SET_POSTS,
