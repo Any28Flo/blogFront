@@ -94,8 +94,7 @@ const Home = () => {
         <ModalPost  />
 
       </Box>
-      <Grid justifyContent="center"   container spacing={2} marginTop={2}
-      >
+      <Grid justifyContent="center" spacing={{ xs: 1, sm: 2, md: 4}}   container marginTop={2}>
         {
           isLoading && (<Spinner/>)
         }

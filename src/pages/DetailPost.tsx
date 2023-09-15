@@ -1,23 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Box, CircularProgress, Typography, Divider} from '@mui/material'
+import { Box, Typography, Divider} from '@mui/material'
 import { useParams } from 'react-router-dom';
 import { useAxios } from '../customHooks/useAxios';
 import { formatDate } from '../utils';
 import { Post } from '../types';
 import Spinner from '../components/layout/Spinner';
+import { useAppContext } from '../context';
 
 const DetailPost = () => {
 
   const params = useParams();
-  
+  const { state } = useAppContext();
+
   const { data, isLoading,error } = useAxios(`/posts/${params.id}`);
-  const [actualPost, setActualPost] = useState<null | Post >()
+  const [actualPost, setActualPost] = useState<null | Post >(null)
 
   useEffect(() => { 
-    setActualPost(data.post)
+    if(state.isOnline){
+      setActualPost(data.post)
+      return
+    }
+    setActualPost(state.posts.find(post => post.id === params.id))
+
   }, [data])
 
-  // TODO: - Add custom component Loading and wrapper
   if (isLoading) return (<Spinner />)
   
   return (

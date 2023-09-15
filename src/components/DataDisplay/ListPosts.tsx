@@ -10,9 +10,9 @@ const ListPosts = ({data}: ListPostsProps) => {
     return (
         <>
         {
-            data.length &&
+            data&&
             data.map((post: Post) => (
-                <Grid item xs={12} md={4}  key={post.id}>
+                <Grid item xs={12} sm={6} md={4}  key={post.id}>
                     <CardPost  data={post}/>
                 </Grid>
             ))
