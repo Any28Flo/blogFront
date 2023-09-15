@@ -6,7 +6,8 @@ import { formatDate } from '../utils';
 import { Post } from '../types';
 import Spinner from '../components/layout/Spinner';
 import { useAppContext } from '../context';
-
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import PersonIcon from '@mui/icons-material/Person';
 const DetailPost = () => {
 
   const params = useParams();
@@ -22,7 +23,7 @@ const DetailPost = () => {
     }
     setActualPost(state.posts.find(post => post.id === params.id))
 
-  }, [data])
+  }, [data, state.isOnline])
 
   if (isLoading) return (<Spinner />)
   
@@ -32,7 +33,8 @@ const DetailPost = () => {
       <Typography variant="h2" mb={2}>{actualPost?.title}</Typography>
       <Divider />
       {/*  TODO:- Add icons to date and author  */}
-      <Typography variant="body1" mt={2}>{formatDate(actualPost?.createdAt)} | {actualPost?.author?.name} </Typography>
+      <Typography variant="body1" mt={2}>
+        <CalendarTodayIcon/>{formatDate(actualPost?.createdAt)} | <PersonIcon/> {actualPost?.author?.name} </Typography>
       </Box>
       <Box mt={5}>
         <Typography variant="body1">{actualPost?.content}</Typography>
