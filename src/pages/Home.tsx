@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 
-import { Box, CircularProgress, Grid} from '@mui/material'
+import { Box, CircularProgress, Grid,Button, Stack} from '@mui/material'
 import { useAppContext } from '../context';
 
 import { useAxios } from '../customHooks/useAxios';
@@ -14,8 +14,9 @@ import { getPosts } from '../db/api';
 import ModalPost from '../components/Dialog/ModalPost';
 import Status from '../components/Inputs/Status';
 import Spinner from '../components/layout/Spinner';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-const filterForm ={
+const initState ={
   type: 'title',
   stringPattern: ''
 }
@@ -27,7 +28,7 @@ const Home = () => {
 
   const { data, isLoading,error } = useAxios('/posts');
 
-  const [filter, setFilter] = useState(filterForm);
+  const [filter, setFilter] = useState(initState);
 
   const [query, setQuery] = useState('');
 
@@ -40,20 +41,25 @@ const Home = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
     const query= `/posts/custom-posts?filter=${filter.type}&strPattern=${filter.stringPattern}`
     setQuery(query);
   } 
 
   const getData = async () => {
     try {
-        const data = await getPosts(query)
-        setPostsFiltered(data.posts)
+        const {posts} = await getPosts(query)
+        setPostsFiltered(posts)
 
     } catch (error) {
         console.log(error)
     }
   }
-  
+
+  const handleClear = () => {
+    setQuery('');
+    setFilter(initState);
+  }
   useEffect(() => {
     if(state.posts.length === 0){
       dispatch({
@@ -67,6 +73,7 @@ const Home = () => {
 
   useEffect(() => {
     if(query){
+
       getData()
     }
   }, [query])
@@ -82,14 +89,26 @@ const Home = () => {
       <Box>
         <Status/>
       </Box>
-      <Box margin={2}>
+      <Stack
+      
+        direction={{ xs: 'column', sm: 'row' }}
+        justifyContent="center"
+        alignItems="center"
+        gap={4}
+        margin={2}>
         <Filter 
           state={filter}
           onChange={handleChange}
           onSubmit={handleSubmit}
           />
-
-      </Box>
+        <Button 
+          variant="outlined" 
+          startIcon={<FilterAltIcon />}
+          onClick={handleClear}
+          >
+          Clear filters
+        </Button>
+      </Stack>
       <Box>
         <ModalPost  />
 
