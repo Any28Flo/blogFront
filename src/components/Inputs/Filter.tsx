@@ -1,7 +1,7 @@
 import { Stack, TextField, FormControl, InputLabel, MenuItem, Button, InputAdornment} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-import Select from '@mui/material/Select';
+import Select, { SelectChangeEvent }  from '@mui/material/Select';
 const options = [
     {
         value: 'title',
