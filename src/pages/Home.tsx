@@ -1,6 +1,6 @@
 import { useEffect, useState} from 'react';
 
-import { Box, CircularProgress, Grid,Button, Stack} from '@mui/material'
+import { Box, Grid,Button, Stack} from '@mui/material'
 import { useAppContext } from '../context';
 
 import { useAxios } from '../customHooks/useAxios';
@@ -32,7 +32,7 @@ const Home = () => {
 
   const [query, setQuery] = useState('');
 
-  const [postsFiltered, setPostsFiltered] = useState([]);
+  const [postsFiltered, setPostsFiltered] = useState({filter:'', data:[]});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -48,8 +48,8 @@ const Home = () => {
 
   const getData = async () => {
     try {
-        const {posts} = await getPosts(query)
-        setPostsFiltered(posts)
+        const data = await getPosts(query);
+        setPostsFiltered(data)
 
     } catch (error) {
         console.log(error)
@@ -67,7 +67,6 @@ const Home = () => {
         payload: data
       })
     }
-    localStorage.setItem('posts', JSON.stringify(data) ?? [])
 
   }, [data])
 
@@ -80,7 +79,8 @@ const Home = () => {
 
   if (error)return ( <div>Error en el server</div>)
 
-  if (isLoading) return (<CircularProgress />)
+  if (isLoading) return (<Spinner />)
+
   return (
     <Box width="100%"  sx={{ gridArea: 'main', padding:'2rem'}}>
       <Box>
@@ -89,8 +89,7 @@ const Home = () => {
       <Box>
         <Status/>
       </Box>
-      <Stack
-      
+      <Stack 
         direction={{ xs: 'column', sm: 'row' }}
         justifyContent="center"
         alignItems="center"
@@ -117,9 +116,12 @@ const Home = () => {
         {
           isLoading && (<Spinner/>)
         }
-        {
-          query ? <ListPosts data={postsFiltered} /> :<ListPosts data={state.posts} />
+        { 
+          query ? 
+            postsFiltered.filter !== 'author' ? <ListPosts data={postsFiltered.data} /> : postsFiltered.data.map((option, index )=>(<ListPosts key={`post-list-${index}`} data={option?.posts} />))
+          :<ListPosts data={state.posts} />
         }
+        
       </Grid>
     </Box>
   )

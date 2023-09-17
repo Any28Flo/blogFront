@@ -10,7 +10,8 @@ const Wrapper = () => {
       gridTemplateColumns={'1fr'}
       gap={1}
       gridTemplateRows={'100px 1fr 80px'}
-      gridTemplateAreas={`header
+      gridTemplateAreas={`
+      header
       main
       footer`}
       maxWidth="xl"

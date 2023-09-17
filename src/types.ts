@@ -2,13 +2,13 @@
 export interface User {
     name: string,
     email: string,
-    id?: number
+    id: number
 }
 export interface Post{
     id: number,
-    title?: string,
-    content?: string,
-    createdAt?: string,
+    title: string,
+    content: string,
+    createdAt: string,
     author: User
 }
   

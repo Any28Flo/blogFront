@@ -2,6 +2,7 @@ import './App.css'
 
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Spinner from './components/layout/Spinner';
 import Wrapper from './components/layout/Wrapper';
 
 
@@ -10,7 +11,7 @@ const DetailPost = lazy(() => import('./pages/DetailPost'));
 const App = () => {
 
   return (
-    <Suspense fallback={<h1>Cargando...</h1>}>
+    <Suspense fallback={<Spinner/>}>
     <Routes>
     <Route element={<Wrapper/>}>
      <Route index element={<Home />} />
