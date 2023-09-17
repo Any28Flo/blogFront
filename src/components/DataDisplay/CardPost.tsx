@@ -10,7 +10,6 @@ interface CardPostProps{
 
 const CardPost = ({data}: CardPostProps) => {
 
-
     return (
         <Card sx={{ maxWidth: 345 , minHeight: 60}}>
             <CardHeader
@@ -22,17 +21,14 @@ const CardPost = ({data}: CardPostProps) => {
                 }
                 title={data.title}
                 subheader={formatDate(data.createdAt)}
-            
             />
             <CardContent>
-
                 <Typography variant="body2" color="text.secondary">
                     {data.content.substring(0, 70)}...
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     Author: {data.author.name}
-                </Typography>
-                
+                </Typography>            
             </CardContent>
             <CardActions>
                 

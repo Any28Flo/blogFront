@@ -1,8 +1,17 @@
-import { Box , CircularProgress} from '@mui/material'
+import { Stack, Box, CircularProgress } from '@mui/material'
 
 const Spinner = () => {
     return (
-        <Box sx={{ gridArea: 'main', display: 'flex', justifyContent: 'center', alignItems: 'center' }}><CircularProgress /></Box>)
+        <Box width="100%" sx={{ gridArea: 'main', padding: '2rem' }}>
+            <Stack
+
+                direction={{ xs: 'column', sm: 'row' }}
+                justifyContent="center"
+                alignItems="center"
+            >
+                <CircularProgress />
+            </Stack>
+        </Box>)
 }
 
 export default Spinner

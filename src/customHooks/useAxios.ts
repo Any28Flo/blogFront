@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { getPosts } from '../db/api';
-
+import { Post } from "../types";
+interface PostRequest{
+    posts? : Post[],
+    
+}
 export const useAxios = (url: string) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
