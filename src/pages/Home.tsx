@@ -89,8 +89,7 @@ const Home = () => {
       <Box>
         <Status/>
       </Box>
-      <Stack
-      
+      <Stack 
         direction={{ xs: 'column', sm: 'row' }}
         justifyContent="center"
         alignItems="center"
