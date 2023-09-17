@@ -9,11 +9,15 @@ const initState = {
     content: '',
     authorId:  1
 }
+const initErrorState={
+    content:false, title:false
+}
 const ModalPost = () => {
     const { state, dispatch } = useAppContext();
 
     const [open, setOpen] = useState(false);
-    const [newPost, setNewPost] = useState(initState)
+    const [newPost, setNewPost] = useState(initState);
+    const [error, setError] = useState(initErrorState);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -25,11 +29,15 @@ const ModalPost = () => {
 
     const handleClose = () => {
         setOpen(false);
+        setNewPost(initState);
+        setError(initErrorState);
+
     };
     const postData = async() => {
         try {
             const data = await postMethod('/posts',{title: newPost.title, content: newPost.content, authorId: newPost.authorId});
             setNewPost(initState);
+            console.log(data)
             dispatch({
                 type: Types.ADD_POSTS,
                 payload: data.newPost
@@ -42,7 +50,9 @@ const ModalPost = () => {
     }
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-       postData()
+        if(newPost.title.trim().length < 2) return setError({...error, title:true})
+        if(newPost.content.trim().length < 2) return setError({...error, content:true})
+        postData()
     }
 
     return (
@@ -70,6 +80,8 @@ const ModalPost = () => {
                         onSubmit={handleSubmit}
                     >
                         <TextField
+                            error={error.title}
+                            helperText="Required field and min 3 characters"
                             autoFocus
                             margin="dense"
                             id="title"
@@ -82,6 +94,8 @@ const ModalPost = () => {
                             value={newPost.title}
                         />
                         <TextField
+                            error={error.content}
+                            helperText="Required field and min 3 characters"
                             margin="dense"
                             id="content"
                             name="content"
