@@ -41,7 +41,7 @@ const Home = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+    if(filter.stringPattern.trim().length < 2) return
     const query= `/posts/custom-posts?filter=${filter.type}&strPattern=${filter.stringPattern}`
     setQuery(query);
   } 
